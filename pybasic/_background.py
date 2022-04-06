@@ -210,7 +210,7 @@ def basic(images_list: List, segmentation: List = None, verbosity = True, **kwar
         XA = np.reshape(X_k_A, [nrows, ncols, -1], order='F')
         XE = np.reshape(X_k_E, [nrows, ncols, -1], order='F')
         XAoffset = np.reshape(X_k_Aoffset, [nrows, ncols], order='F')
-        XE_norm = XE / np.mean(XA, axis=(0, 1))
+        XE_norm = np.nan_to_num(XE / np.mean(XA, axis=(0, 1))) #this turns nan when XA has zeros
 
         # Update the weights:
         weight = np.ones_like(XE_norm) / (np.abs(XE_norm) + settings.eplson)

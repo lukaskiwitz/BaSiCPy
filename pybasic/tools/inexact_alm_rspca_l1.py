@@ -115,7 +115,7 @@ def inexact_alm_rspca_l1(images, weight=None, **kwargs):
             # limit B1_offset: 0<B1_offset<B1_uplimit
 
             B1_offset = np.maximum(B1_offset, 0)
-            B1_offset = np.minimum(B1_offset, B1_uplimit / np.mean(W_idct_hat))
+            B1_offset = np.nan_to_num(np.minimum(B1_offset, B1_uplimit / np.mean(W_idct_hat))) # this turns nan when mean is zero
 
             B_offset = B1_offset * np.reshape(W_idct_hat, -1, order='F') * (-1)
 
